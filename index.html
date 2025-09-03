@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title> Mr_Y The GHost — Player</title>
+<link rel="manifest" href="./manifest.webmanifest">
+<meta name="theme-color" content="#00d4ff" />
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<canvas id="bgCanvas"></canvas>
+
+<header>
+  <div class="brand">
+    <div class="logo">M</div>
+    <h1>Mr_Y Player</h1>
+  </div>
+
+  <button id="menuBtn" title="Menu ☰">☰</button> <!-- BOUTON MENU MOBILE -->
+
+
+  
+      <button class="icon-btn" id="themeBtn" title="Changer de thème">Thème</button>
+    </div>
+</header>
+
+<div class="container">
+  <nav class="side" id="sideNav">
+    <div id="searchBar">
+      <svg viewBox="0 0 0 0" width="1" height="0" style="opacity:.0;margin-right:0px"><path fill="white"/></svg>
+      <input id="searchInput" placeholder="Rechercher " />
+    </div>
+    <div class="nav-item active" data-target="home">🏠 Toutes Chansons</div>
+    <div class="nav-item" data-target="playlist">🎵 Playlists</div>
+    <div class="nav-item" data-target="recent">🕘 Dernières Jouées</div>
+    <div class="nav-item" data-target="popular">📈 Les plus Écoutées</div>
+    <div class="nav-item" data-target="liked">❤️ Aimées</div>
+    <div class="nav-item" data-target="discover">🔎 Découverte</div>
+    <div class="nav-item" data-target="settingsPage">⚙ Paramètres</div>
+    <hr style="border:none;border-top:1px solid rgba(255,255,255,0.06);margin:12px 0">
+    <div style="display:flex;gap:8px;flex-wrap:wrap">
+      <button class="btn" id="importBtn">📂 Importer dossier</button>
+      <button class="icon-btn" id="installBtn" title="Installer">Installer</button>
+      <button class="btn" id="saveOfflineBtn">💾 Tout hors‑ligne</button>
+    </div>
+  </nav>
+
+  <main class="view">
+    <section id="home" class="active">
+      <h2>Toutes les Chansons</h2>
+      <div style="display:flex;gap:8px;margin:10px 0;flex-wrap:wrap">
+        <button class="btn" id="createPlaylistBtn">+ Créer Playlist</button>
+        <select id="sortSelect" style="padding:8px;border-radius:8px;background:transparent;border:1px solid rgba(255,255,255,0.08);color:var(--text)">
+          <option value="recent">Trier: Récentes</option>
+          <option value="alpha">Trier: Alphabétique</option>
+          <option value="plays">Trier: Plus écoutées</option>
+        </select>
+        <label style="display:flex;align-items:center;gap:6px;color:var(--muted)"><input type="checkbox" id="shuffle"> Shuffle</label>
+        <label style="display:flex;align-items:center;gap:6px;color:var(--muted)"><input type="checkbox" id="repeat"> Boucle</label>
+      </div>
+      <div id="songsGrid" class="grid"></div>
+    </section>
+
+    <section id="playlist" hidden>
+      <h2>Playlists</h2>
+      <div id="playlistsArea"></div>
+    </section>
+
+    <section id="recent" hidden>
+      <h2>Dernières Jouées</h2>
+      <ul id="recentList"></ul>
+    </section>
+
+    <section id="popular" hidden>
+      <h2>Les plus Écoutées</h2>
+      <ul id="popularList"></ul>
+    </section>
+
+    <section id="liked" hidden>
+      <h2>❤️ Chansons aimées</h2>
+      <ul id="likedList"></ul>
+    </section>
+
+    <section id="discover" hidden>
+      <h2>Découverte</h2>
+      <div id="discoverGrid" class="grid"></div>
+    </section>
+
+    <section id="settingsPage" hidden>
+      <h2>Paramètres</h2>
+      <div style="display:flex;gap:12px;flex-wrap:wrap">
+        <div style="min-width:220px">
+          <h4>Qualité audio</h4>
+          <select id="qualitySelect" style="padding:8px;border-radius:8px;background:transparent;border:1px solid rgba(255,255,255,0.08);color:var(--text)">
+            <option value="auto">Auto</option>
+            <option value="high">Haute</option>
+            <option value="low">Faible</option>
+          </select>
+        </div>
+        <div>
+          <h4>Option de lecture</h4>
+          <label style="display:block;color:var(--muted)"><input type="radio" name="playMode" value="sequential" checked> Lecture séquentielle</label>
+          <label style="display:block;color:var(--muted)"><input type="radio" name="playMode" value="shuffle"> Lecture aléatoire</label>
+          <label style="display:block;color:var(--muted)"><input type="radio" name="playMode" value="alphabet"> Lecture alphabétique</label>
+        </div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<!-- Mini player -->
+<div class="mini-player-bar" id="miniBar">
+  <img id="miniCover" class="mp-cover" src="">
+  <div class="mp-info">
+    <div class="mp-title" id="miniTitle">Titre</div>
+    <div class="mp-sub" id="miniArtist">Artiste</div>
+  </div>
+  <div class="mp-controls">
+    <button class="ctrl" id="miniPrev">⏮️</button>
+    <button class="ctrl" id="miniPlay">▶️</button>
+    <button class="ctrl" id="miniNext">⏭️</button>
+    <button class="ctrl" id="openFull">🔍</button>
+  </div>
+</div>
+
+<!-- Full player -->
+<div class="player-modal" id="playerModal" aria-hidden="true">
+  <div class="player-card">
+    <img id="pvArt" class="pv-art" src="">
+    <div class="pv-meta">
+      <div class="pv-title" id="pvTitle">Titre</div>
+      <div class="pv-artist" id="pvArtist">Artiste</div>
+
+      <div style="margin-top:12px">
+        <input id="pvSeek" class="pv-range" type="range" min="0" max="100" value="0">
+        <div style="display:flex;justify-content:space-between;color:var(--muted);font-size:13px">
+          <span id="pvCur">0:00</span><span id="pvDur">0:00</span>
+        </div>
+      </div>
+
+      <div class="pv-controls">
+        <button class="ctrl" id="pvPrev">⏮️</button>
+        <button class="ctrl" id="pvPlay">▶️</button>
+        <button class="ctrl" id="pvNext">⏭️</button>
+        <button class="ctrl" id="likeBtn">🤍 J'aime</button>
+        <button class="ctrl" id="pvClose">✖</button>
+      </div>
+
+      <div class="canvas-wrap" style="margin-top:12px">
+        <canvas id="pvCanvas" style="width:100%;height:120px"></canvas>
+      </div>
+
+      <div class="eq">
+        <div><div style="text-align:center;color:var(--muted)">Basses</div><input id="eqLow" type="range" min="-15" max="15" value="0"></div>
+        <div><div style="text-align:center;color:var(--muted)">Médiums</div><input id="eqMid" type="range" min="-15" max="15" value="0"></div>
+        <div><div style="text-align:center;color:var(--muted)">Aigus</div><input id="eqHigh" type="range" min="-15" max="15" value="0"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<audio id="audioEl" crossorigin="anonymous"></audio>
+
+<script src="./app.js"></script>
+</body>
+</html>
