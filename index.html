@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title> Mr_Y The GHost — Player</title>
-<link rel="manifest" href="./manifest.webmanifest">
+<title> Mr_Y Player</title>
+<link rel="manifest" href="manifest.webmanifest">
 <meta name="theme-color" content="#00d4ff" />
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
@@ -18,32 +18,27 @@
     <div class="logo">M</div>
     <h1>Mr_Y Player</h1>
   </div>
-
-  <button id="menuBtn" title="Menu ☰">☰</button> <!-- BOUTON MENU MOBILE -->
-
-
   
-      <button class="icon-btn" id="themeBtn" title="Changer de thème">Thème</button>
-    </div>
+  <div class="top-right">
+  
+    <button class="icon-btn" id="installBtn" title="Installer">Installer</button>
+    
+    <button id="menuBtn" title="Menu">☰</button>
+  </div>
 </header>
 
 <div class="container">
-  <nav class="side" id="sideNav">
-    <div id="searchBar">
-      <svg viewBox="0 0 0 0" width="1" height="0" style="opacity:.0;margin-right:0px"><path fill="white"/></svg>
-      <input id="searchInput" placeholder="Rechercher " />
-    </div>
-    <div class="nav-item active" data-target="home">🏠 Toutes Chansons</div>
-    <div class="nav-item" data-target="playlist">🎵 Playlists</div>
+  <nav class="side" id="sideNav" style="background-color:#162447">
+    <div class="nav-item active" data-target="home"> Toutes🏠 Chansons</div>
+    
     <div class="nav-item" data-target="recent">🕘 Dernières Jouées</div>
     <div class="nav-item" data-target="popular">📈 Les plus Écoutées</div>
     <div class="nav-item" data-target="liked">❤️ Aimées</div>
-    <div class="nav-item" data-target="discover">🔎 Découverte</div>
+   
     <div class="nav-item" data-target="settingsPage">⚙ Paramètres</div>
     <hr style="border:none;border-top:1px solid rgba(255,255,255,0.06);margin:12px 0">
     <div style="display:flex;gap:8px;flex-wrap:wrap">
       <button class="btn" id="importBtn">📂 Importer dossier</button>
-      <button class="icon-btn" id="installBtn" title="Installer">Installer</button>
       <button class="btn" id="saveOfflineBtn">💾 Tout hors‑ligne</button>
     </div>
   </nav>
@@ -52,7 +47,7 @@
     <section id="home" class="active">
       <h2>Toutes les Chansons</h2>
       <div style="display:flex;gap:8px;margin:10px 0;flex-wrap:wrap">
-        <button class="btn" id="createPlaylistBtn">+ Créer Playlist</button>
+   
         <select id="sortSelect" style="padding:8px;border-radius:8px;background:transparent;border:1px solid rgba(255,255,255,0.08);color:var(--text)">
           <option value="recent">Trier: Récentes</option>
           <option value="alpha">Trier: Alphabétique</option>
@@ -64,10 +59,6 @@
       <div id="songsGrid" class="grid"></div>
     </section>
 
-    <section id="playlist" hidden>
-      <h2>Playlists</h2>
-      <div id="playlistsArea"></div>
-    </section>
 
     <section id="recent" hidden>
       <h2>Dernières Jouées</h2>
@@ -84,15 +75,13 @@
       <ul id="likedList"></ul>
     </section>
 
-    <section id="discover" hidden>
-      <h2>Découverte</h2>
-      <div id="discoverGrid" class="grid"></div>
-    </section>
+  
 
     <section id="settingsPage" hidden>
       <h2>Paramètres</h2>
       <div style="display:flex;gap:12px;flex-wrap:wrap">
         <div style="min-width:220px">
+          <button class="icon-btn" id="themeBtn" title="Changer de thème">Thème</button>
           <h4>Qualité audio</h4>
           <select id="qualitySelect" style="padding:8px;border-radius:8px;background:transparent;border:1px solid rgba(255,255,255,0.08);color:var(--text)">
             <option value="auto">Auto</option>
@@ -153,17 +142,13 @@
         <canvas id="pvCanvas" style="width:100%;height:120px"></canvas>
       </div>
 
-      <div class="eq">
-        <div><div style="text-align:center;color:var(--muted)">Basses</div><input id="eqLow" type="range" min="-15" max="15" value="0"></div>
-        <div><div style="text-align:center;color:var(--muted)">Médiums</div><input id="eqMid" type="range" min="-15" max="15" value="0"></div>
-        <div><div style="text-align:center;color:var(--muted)">Aigus</div><input id="eqHigh" type="range" min="-15" max="15" value="0"></div>
-      </div>
+   
     </div>
   </div>
 </div>
 
 <audio id="audioEl" crossorigin="anonymous"></audio>
 
-<script src="./app.js"></script>
+<script src="app.js"></script>
 </body>
 </html>

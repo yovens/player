@@ -1,7 +1,7 @@
 {
-  "name": "MUsics with mr_Y The GHost — PRO",
-  "short_name": "MrY Musics",
-  "start_url": "/index.html",
+  "name": " Mr_Y Player",
+  "short_name": "Mr_Y Player",
+  "start_url": "index.html",
   "display": "standalone",
   "background_color": "#070708",
   "theme_color": "#00d4ff",

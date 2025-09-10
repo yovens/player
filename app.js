@@ -231,13 +231,7 @@ function drawViz(){
     x += barW + 2;
   }
 }
-[eqLow,eqMid,eqHigh].forEach(el=>el.addEventListener('input', ()=>{
-  if(filterL && filterM && filterH){
-    filterL.gain.value = Number(eqLow.value);
-    filterM.gain.value = Number(eqMid.value);
-    filterH.gain.value = Number(eqHigh.value);
-  }
-}));
+
 
 /* update seek UI */
 audioEl.addEventListener('loadedmetadata', ()=>{
@@ -316,21 +310,9 @@ saveOfflineBtn.addEventListener('click', async ()=>{
   alert('Sauvegarde terminée (IndexedDB)');
 });
 
-/* search */
-searchInput.addEventListener('input', ()=>{
-  const q = searchInput.value.trim().toLowerCase();
-  if(!q){ renderSongs(); return; }
-  const filtered = localSongs.filter(s => (s.title||s.name).toLowerCase().includes(q) || (s.artist||'').toLowerCase().includes(q));
-  renderSongs(filtered);
-});
 
-/* create playlist UI */
-createPlaylistBtn.addEventListener('click', ()=>{
-  const name = prompt('Nom de la playlist:');
-  if(!name) return;
-  playlists[name] = [];
-  renderPlaylists();
-});
+
+
 function renderPlaylists(){
   const area = playlistsArea;
   area.innerHTML = '';

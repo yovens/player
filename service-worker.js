@@ -1,5 +1,5 @@
 // Simple PWA service worker with cache-first for app shell
-const CACHE = 'mry-ghost-v1';
+const CACHE = 'mr_y-ghost-v1';
 const APP_SHELL = [
   './',
   './index.html',
